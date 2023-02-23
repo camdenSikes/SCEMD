@@ -23,7 +23,7 @@ disp('Computing embeddings...');
 Us = cell(1,N);
 for i=1:N
     n = size(Graphs(i).am, 1);
-    [U, ~] = eigs(Graphs(i).am, min(n, d));
+    [U, ~] = eigs(Graphs(i).am, min(n, d),"largestreal");
     U = abs(U);
     %for instances of small graphs (should be rare), pad out embeddings
     %with 0

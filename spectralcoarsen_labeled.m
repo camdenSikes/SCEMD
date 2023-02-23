@@ -1,4 +1,4 @@
-function [A,vertices,weights] = spectralcoarsen_labeled(Graph,d,k,buildMat)
+function [A,vertices,weights] = spectralcoarsen_labeled(Graph,d,k,buildMat,maxlabelval)
 % Computes a coarsened version of a graph inspired by the pyramid match
 % graph kernel. Each slice represents a potential vertex, weighted by how
 % many vertices appear in that slice. Vertices are connected if vertices in
@@ -9,6 +9,7 @@ function [A,vertices,weights] = spectralcoarsen_labeled(Graph,d,k,buildMat)
 %   k: the level of coarsening. Space is split into k slices per
 %   dimension
 %   buildMat: True if A should be created, false otherwise
+%   maxlabelval: The highest possible value for a label to be
 %
 % Output:
 %   A: adjacency matrix of coarsened graph, edges weighted by number of
@@ -21,9 +22,16 @@ function [A,vertices,weights] = spectralcoarsen_labeled(Graph,d,k,buildMat)
 G = Graph.am;
 N = size(G,1);
 d = min(d,N);
-maxlabelval = max(Graph.nl.values);
-[eigvecs,~] = eigs(G,d,"largestreal");
+if(nargin < 5)
+    maxlabelval = max(Graph.nl.values);
+end
+[eigvecs,~] = eigs(G,min(d,N),"largestreal");
 eigvecs = abs(eigvecs);
+%for instances of small graphs (should be rare), pad out embeddings
+%with 0
+if(N<d)
+    eigvecs = [eigvecs zeros(N,d-N)];
+end
 
 %Get count of how many vertices appear in each slice
 counts = containers.Map;

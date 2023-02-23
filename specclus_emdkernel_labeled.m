@@ -21,9 +21,6 @@ if nargin < 3
     k = 4;
 end
 
-if nargin < 4
-    option = "accurate";
-end
 
 N = size(Graphs,2);
 tic;
@@ -50,7 +47,7 @@ for i=1:N
         fprintf(1,'%d%s',cur_percent,'%');
     end
     
-    [~,vertices,weights] = spectralcoarsen_labeled(Graphs(i),d,k,false);
+    [~,vertices,weights] = spectralcoarsen_labeled(Graphs(i),d,k,false,maxlabelval);
     
     Us{i} = vertices;
     Ws{i} = weights;
