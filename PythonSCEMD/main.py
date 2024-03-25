@@ -83,7 +83,7 @@ def load_sparse_adjmats(dataset, labeled):
         nodelists.append(nodes)
         if labeled:
             label = [nodelab[j - 1] for j in nodes]
-            label = np.array(labels)
+            label = np.array(label)
             labels.append(label)
         adjmat = sp.lil_array((len(nodes), len(nodes)))
         adjmats.append(adjmat)
