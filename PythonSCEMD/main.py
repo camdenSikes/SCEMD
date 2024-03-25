@@ -24,9 +24,9 @@ def main():
     args = parser.parse_args()
     adjmats, graphlabels, nodelabels = load_sparse_adjmats(args.dataset, args.labeled)
     # random subset for speeding up testing
-    inds = random.sample(range(len(adjmats)), 800)
-    adjmats = [adjmats[i] for i in inds]
-    graphlabels = [graphlabels[i] for i in inds]
+    # inds = random.sample(range(len(adjmats)), 800)
+    # adjmats = [adjmats[i] for i in inds]
+    # graphlabels = [graphlabels[i] for i in inds]
     if args.labeled:
         nodelabels = [nodelabels[i] for i in inds]
     tic = time.perf_counter()
