@@ -1,6 +1,6 @@
 # SCEMD
 
-This repositort contains implementations of the Earth Mover's Distance graph kernel, and the Spectral Clustering Earth Mover's Distance Graph kernel. 
+This repository contains implementations of the Earth Mover's Distance graph kernel, and the Spectral Clustering Earth Mover's Distance Graph kernel. 
 
 /PythonSCEMD contains the current, up to date version, implemented in Python 3. 
 
